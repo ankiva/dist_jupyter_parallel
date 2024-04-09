@@ -31,7 +31,23 @@ Guide how to utilize parallel algorithms in Jupyter Notebook and optionally exec
 It runs as a SLURM job inside [Rocket][3] cluster. Since runtime environment is your user home directory at UT it is easier to configure various aspects.
 
 ### Configure environment
-I use conda library to configure python environment and install required python libraries. It is possible to register a python environment as a kernel for UT HPC Jupyter.
+I use conda package and environment management tool to configure python environment and install required python libraries. It is possible to register a python environment as a kernel for UT HPC Jupyter.
+  <sh>
+    module load any/python/3.8.3-conda
+    conda create -n conda_venv_parallel
+    conda activate conda_venv_parallel
+    conda install ipykernel
+    python -m ipykernel install --user --name=conda_venv_parallel
+  </sh>
+
+Configure kernel:
+see your configured environment variables:
+  echo $PATH
+  echo $LIBRARY_PATH
+  echo $LD_LIBRARY_PATH
+
+And insert the values to kernel configuration file ~/.local/share/jupyter/kernels/conda_venv_parallel/kernel.json
+Restart HPC Jupyter.
 
 ### Running default IPython cluster on UT HPC Jupyter 
 
@@ -46,6 +62,7 @@ I use conda library to configure python environment and install required python 
 
 ## References
 
-[1]: https://docs.hpc.ut.ee/public/services/jupyter.hpc.ut.ee/
-[2]: https://hpc.ut.ee/
-[3]: https://hpc.ut.ee/services/HPC-services/Rocket
+[1]: https://docs.hpc.ut.ee/public/services/jupyter.hpc.ut.ee/ "UT HPC Jupyter"
+[2]: https://hpc.ut.ee/ "UT HPC docs"
+[3]: https://hpc.ut.ee/services/HPC-services/Rocket "UT HPC rocket"
+[4]: https://docs.hpc.ut.ee/public/cluster/Software/python_envs "Python environments in HPC"
