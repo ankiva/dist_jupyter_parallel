@@ -1,0 +1,11 @@
+#!/bin/sh
+#SBATCH --output={output_file}
+#SBATCH --export=ALL
+#SBATCH --job-name=ipcontroller-{cluster_id}
+#SBATCH --ntasks=1
+#SBATCH --time=30
+echo "controller using hostname $(hostname)"
+which python
+echo "i am $(whoami) on $(pwd), profile_dir is {profile_dir}"
+{program_and_args}
+##/gpfs/space/home/antikivi/.conda/envs/conda_venv_example/bin/python -m ipyparallel.controller

@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --time=30
+#SBATCH --export=ALL
+#SBATCH --output={output_file}
+#SBATCH --job-name=ipengine-{cluster_id}
+#SBATCH --ntasks={n}
+#SBATCH --nodes={n//5 + 1}
+which python
+echo "engine using hostname $(hostname)"
+echo "i am $(whoami) on $(pwd), profile_dir is {profile_dir}"
+echo "using for srun program_and_args={program_and_args}"
+#echo "----printenv----"
+#printenv
+#echo "----printenv----"
+srun {program_and_args} --debug --profile-dir={profile_dir} --cluster-id={cluster_id}
