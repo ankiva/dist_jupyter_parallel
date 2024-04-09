@@ -30,6 +30,6 @@ Guide how to utilize parallel algorithms in Jupyter Notebook and optionally exec
 
 ### Running SLURM cluster on UT HPC Jupyter using Rocket cluster
 
-# Running SLURM IPython cluster on Rocket cluster from local Jupyter Notebook
+## Running SLURM IPython cluster on Rocket cluster from local Jupyter Notebook
 
-# Running MPI IPython cluster on Rocket cluster from local Jupyter Notebook
+## Running MPI IPython cluster on Rocket cluster from local Jupyter Notebook
