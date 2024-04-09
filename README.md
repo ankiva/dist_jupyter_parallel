@@ -32,28 +32,34 @@ It runs as a SLURM job inside [Rocket][3] cluster. Since runtime environment is 
 
 ### Configure environment
 I use conda package and environment management tool to configure python environment and install required python libraries. It is possible to register a python environment as a kernel for UT HPC Jupyter.
-  <sh>
+
     module load any/python/3.8.3-conda
     conda create -n conda_venv_parallel
     conda activate conda_venv_parallel
     conda install ipykernel
+    conda install ipyparallel
     python -m ipykernel install --user --name=conda_venv_parallel
-  </sh>
 
 Configure kernel:
 see your configured environment variables:
-  echo $PATH
-  echo $LIBRARY_PATH
-  echo $LD_LIBRARY_PATH
 
-And insert the values to kernel configuration file ~/.local/share/jupyter/kernels/conda_venv_parallel/kernel.json
-Restart HPC Jupyter.
+    echo $PATH
+    echo $LIBRARY_PATH
+    echo $LD_LIBRARY_PATH
+
+And insert the values to kernel JSON configuration file ~/.local/share/jupyter/kernels/conda_venv_parallel/kernel.json
+
+Restart HPC Jupyter. Select `conda_venv_parallel` from kernel list in HPC Jupyter.
 
 ### Running default IPython cluster on UT HPC Jupyter 
 
 ### Running MPI IPython cluster on UT HPC Jupyter
 
 ### Running SLURM cluster on UT HPC Jupyter using Rocket cluster
+
+#### Configuration
+
+#### Execution
 
 ## Running SLURM IPython cluster on Rocket cluster from local Jupyter Notebook
 
