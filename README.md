@@ -17,13 +17,42 @@ Guide how to utilize parallel algorithms in Jupyter Notebook and optionally exec
 
 ### Introduction to ipyparallel library
 
+#### Magics
+
 ### Introduction to UT HPC
 
 ### Introduction to SLURM
 
 ## Running cluster locally on default profile
 
+It assumes that ipyparallel is installed locally. Cluster constructor starts controller and engines. If number of engines is not specified then it creates the same number of engines as how many cores the machines has.
+
+    import ipyparallel as ipp
+    import time
+    task_durations = [1] * 4
+    # request a cluster
+    with ipp.Cluster() as rc:
+        # get a view on the cluster
+        view = rc.load_balanced_view()
+        # submit the tasks
+        asyncresult = view.map_async(time.sleep, task_durations)
+        # wait interactively for results
+        asyncresult.wait_interactive()
+        # retrieve actual results
+        result = asyncresult.get()
+    # at this point, the cluster processes have been shutdown
+
+Execution:
+
+![Local cluster execution!](cluster_default_local.jpg "Local default cluster execution")
+
+Notebook file: [./ipyparallel_test.ipynb](./ipyparallel_test.ipynb)
+
 ## Running MPI IPython cluster locally
+
+In order for MPI example to work locally, /etc/hosts file has to have entry for resolved hostname.
+
+
 
 ## Running IPython clusters on UT HPC Jupyter Notebook
 
@@ -59,7 +88,7 @@ Restart HPC Jupyter. Select `conda_venv_parallel` from kernel list in HPC Jupyte
 
 #### Configuration
 
-Create new IPython profile
+Create new IPython profile for slurm specific configuration
 
     ipython profile create --parallel --profile=slurm
 
@@ -84,7 +113,7 @@ Add template for engines in HPC user home directory with name slurm.engine.templ
     #SBATCH --nodes={n//5 + 1}
     srun {program_and_args} --debug --profile-dir={profile_dir} --cluster-id={cluster_id}
 
-Configure ~/.ipython/profile_slurm/ipcluster_config.py
+Configure ~/.ipython/profile_slurm/ipcluster_config.py:
 
     c.SlurmControllerLauncher.batch_template_file = 'slurm.controller.template'
     c.SlurmEngineSetLauncher.batch_template_file = 'slurm.engine.template'
@@ -100,9 +129,8 @@ Configure ~/.ipython/profile_slurm/ipcluster_config.py
         import platform
         return f"Hello World from hostname {platform.node()}."
         
-    cluster = ipp.Cluster(profile="slurm_example", n=12, timelimit="30", engine_timeout=80, debug=True, log_level=10, delay=120, send_engines_connection_env=True)
+    cluster = ipp.Cluster(profile="slurm", n=12, timelimit="30", engine_timeout=80, log_level=10, delay=120)
     
-    # send connection info: connection files are created later than timeout 60s
     try:
         print(f"---starting cluster {dt.now()}")
         cluster.start_cluster_sync()
@@ -123,6 +151,7 @@ Configure ~/.ipython/profile_slurm/ipcluster_config.py
         # will also remove log files and connection files
         cluster.stop_cluster_sync()
 
+Notebook file: [./slurm_example.ipynb](./slurm_example.ipynb)
 ## Running SLURM IPython cluster on Rocket cluster from local Jupyter Notebook
 
 ## Running MPI IPython cluster on Rocket cluster from local Jupyter Notebook
