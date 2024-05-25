@@ -12,7 +12,6 @@ JupyterLAB - mostly single-user web UI where it is possible to open multiple not
 JupyterHUB - multi-user server with optional authentication
 
 
-
 #### Jupyter Notebook classic
 
 Jupyter notebook has 3 main components: ui, server and kernel
@@ -58,8 +57,6 @@ Use cases:
 - Run a set of tasks on a set of CPUs using dynamic load balancing
 
 ![IPyParallel architecture](ipyparallel_arch.jpg)
-
-#### Magics
 
 ### Introduction to UT HPC Rocket
 
