@@ -20,18 +20,19 @@ Jupyter notebook has 3 main components: ui, server and kernel
 ![Jupyter Notebook architecture](jupyter_notebook_arch.jpg)
 
 #### Jupiter LAB
+[Jupyter LAB][7] is rich and extendable web-based user interface that lets an user manage, navigate between and display multiple notebooks.
+
 
 #### Jupyter HUB
 
+[Jupyter HUB][8] is a multi-user system which supports managing single-user notebook servers and user authentication.
+Figure depicts components of HUB and their interactions. First, user arrives to the proxy then proxy forwards the user to the hub(authenticator). If user is authenticated, HUB spawns new single-user note- book server and configures proxy to redirect the user there. Jupyter HUB is also used in Rocket cluster in order to serve notebooks for users in the cluster.
+
+![Jupyter HUB](jhub-parts.png)
+
 #### Binder
 
-The Binder project offers an easy place to share computing environments to everyone. It allows users to specify custom environments and share them with a single link. Use cases involve workshops, scientific workflows and streamline sharing among teams.
-
-https://jupyter.org/binder
-
-#### nbgrader
-
-nbgrader is a tool that facilitates creating and grading assignments in the Jupyter notebook. It allows instructors to easily create notebook-based assignments that include both coding exercises and written free-responses. nbgrader then also provides a streamlined interface for quickly grading completed assignments.
+The [Binder project][9] offers an easy place to share computing environments to everyone. It allows users to specify custom environments and share them with a single link. Use cases involve workshops, scientific workflows and streamline sharing among teams.
 
 ### Introduction to ipyparallel library
 
@@ -239,12 +240,8 @@ Configure ~/.ipython/profile_slurm/ipcluster_config.py:
         cluster.stop_cluster_sync()
 
 Notebook file: [./slurm_example.ipynb](./slurm_example.ipynb)
-## Running SLURM IPython cluster on Rocket cluster from local Jupyter Notebook
-
-## Running MPI IPython cluster on Rocket cluster from local Jupyter Notebook
 
 
-## References
 
 [1]: https://docs.hpc.ut.ee/public/services/jupyter.hpc.ut.ee/ "UT HPC Jupyter"
 [2]: https://hpc.ut.ee/ "UT HPC docs"
@@ -252,3 +249,6 @@ Notebook file: [./slurm_example.ipynb](./slurm_example.ipynb)
 [4]: https://docs.hpc.ut.ee/public/cluster/Software/python_envs "Python environments in HPC"
 [5]: https://ipyparallel.readthedocs.io/en/latest/tutorial "IPyParallel tutorial"
 [6]: https://ipyparallel.readthedocs.io/en/latest/api/ipyparallel.html "IPyParallel source"
+[7]: https://github.com/jupyterlab/jupyterlab "Jupyter LAB"
+[8]: https://jupyterhub.readthedocs.io/ "Jupyter HUB"
+[9]: https://jupyter.org/binder "Jupyter binder"
