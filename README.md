@@ -141,7 +141,28 @@ see your configured environment variables:
     echo $LIBRARY_PATH
     echo $LD_LIBRARY_PATH
 
-And insert the values to kernel JSON configuration file ~/.local/share/jupyter/kernels/conda_venv_parallel/kernel.json
+And insert the values to kernel JSON configuration file ~/.local/share/jupyter/kernels/conda_venv_parallel/kernel.json under path env:
+    
+    {
+        "argv": [
+            "/gpfs/space/home/antikivi/.conda/envs/conda_venv_example/bin/python",
+            "-m",
+            "ipykernel_launcher",
+            "-f",
+            "{connection_file}"
+        ],
+        "display_name": "conda_venv_example",
+        "language": "python",
+        "metadata": {
+            "debugger": true
+        },
+        "env": {
+            "PATH": "/gpfs/space/home/antikivi/.conda/envs/conda_venv_example/bin:/gpfs/space/software/cluster_software/manual/any/python/conda/3.8/condabin:/gpfs/space/software/cluster_software/manual/any/python/conda/3.8/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/gpfs/space/home/antikivi/.local/bin:/gpfs/space/home/antikivi/bin",
+            "LD_LIBRARY_PATH": "/gpfs/space/software/cluster_software/manual/any/python/conda/3.8/lib",
+            "LIBRARY_PATH": ""
+        }
+    }
+
 
 Restart HPC Jupyter. Select `conda_venv_parallel` from kernel list in HPC Jupyter.
 
